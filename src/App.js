@@ -1,9 +1,11 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { useSelector } from 'react-redux';
 import 'react-native-gesture-handler';
 
 import Routes from './Routes';
 
 export default function App() {
-  return <Routes />;
+  const signed = useSelector(state => state.auth.signed);
+
+  return <Routes signed={signed} />;
 }

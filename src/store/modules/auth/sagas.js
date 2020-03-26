@@ -2,7 +2,9 @@ import { all, takeLatest, call, put } from 'redux-saga/effects';
 import { Alert } from 'react-native';
 
 import api from '../../../services/api';
-import { signInSuccess, signFailure } from './actions';
+import { signInSuccess, signFailure, signOutSuccess } from './actions';
+
+const delay = time => new Promise(resolve => setTimeout(resolve, time));
 
 export function* signIn({ payload }) {
   try {
@@ -14,7 +16,8 @@ export function* signIn({ payload }) {
 
     yield put(signInSuccess(user));
   } catch (err) {
-    if (err.code === 400) {
+    const { status } = err.response;
+    if (status === 400) {
       Alert.alert('Falha na autenticação', 'Verifique o seu ID.');
     } else {
       Alert.alert('Erro', 'Falha na comunicação com o servidor.');
@@ -24,4 +27,12 @@ export function* signIn({ payload }) {
   }
 }
 
-export default all([takeLatest('@auth/SIGN_IN_REQUEST', signIn)]);
+export function* signOut() {
+  yield call(delay, 1000);
+  yield put(signOutSuccess());
+}
+
+export default all([
+  takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_OUT_REQUEST', signOut),
+]);

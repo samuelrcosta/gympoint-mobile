@@ -21,9 +21,14 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.loading = false;
         break;
       }
-      case '@auth/SIGN_OUT': {
-        draft.token = null;
+      case '@auth/SIGN_OUT_REQUEST': {
         draft.signed = false;
+        draft.loading = true;
+        break;
+      }
+      case '@auth/SIGN_OUT_SUCCESS': {
+        draft.signed = false;
+        draft.loading = false;
         break;
       }
       default:

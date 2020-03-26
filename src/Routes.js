@@ -2,7 +2,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Topbar from './components/Topbar';
@@ -75,26 +74,27 @@ function SignedNavigator() {
   );
 }
 
-export default function Routes() {
-  const signed = useSelector(state => state.auth.signed);
-
+export default function Routes({ signed }) {
   return (
     <NavigationContainer>
       <Base.Navigator initialRouteName={signed ? 'Signed' : 'SignIn'}>
-        <Base.Screen
-          name="SignIn"
-          options={switchOptions}
-          component={SignInNavigator}
-        />
-        <Base.Screen
-          name="Signed"
-          options={{
-            headerStyle: { height: 30 },
-            headerTitle: () => <Topbar />,
-            headerTitleAlign: 'center',
-          }}
-          component={SignedNavigator}
-        />
+        {!signed ? (
+          <Base.Screen
+            name="SignIn"
+            options={switchOptions}
+            component={SignInNavigator}
+          />
+        ) : (
+          <Base.Screen
+            name="Signed"
+            options={{
+              headerStyle: { height: 30 },
+              headerTitle: () => <Topbar />,
+              headerTitleAlign: 'center',
+            }}
+            component={SignedNavigator}
+          />
+        )}
       </Base.Navigator>
     </NavigationContainer>
   );
