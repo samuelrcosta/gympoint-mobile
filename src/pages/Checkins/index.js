@@ -71,6 +71,11 @@ export default function Checkins() {
           'Operação não permitida',
           'Você não possui um plano ativo para fazer o checkin.'
         );
+      } else if (status === 400) {
+        Alert.alert(
+          'Operação não permitida',
+          'Você você já fez 7 checkins nos últims 7 dias.'
+        );
       } else {
         Alert.alert('Erro', 'Falha na comunicação com o servidor.');
       }

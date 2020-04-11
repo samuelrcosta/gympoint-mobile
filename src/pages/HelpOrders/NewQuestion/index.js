@@ -15,6 +15,7 @@ export default function NewQuestion() {
   async function handleSubmit() {
     if (question === '') {
       Alert.alert('Erro', 'Preencha o campo para prosseguir.');
+      return;
     }
 
     setLoading(true);
