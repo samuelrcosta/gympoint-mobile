@@ -6,11 +6,11 @@ export const Container = styled.ScrollView`
   padding: 0 20px;
 `;
 
-export const CheckinButton = styled(Button)`
+export const CreateButton = styled(Button)`
   margin-top: 20px;
 `;
 
-export const CheckinButtonText = styled.Text`
+export const CreateButtonText = styled.Text`
   color: #fff;
   font-weight: bold;
   font-size: 15px;
@@ -29,9 +29,7 @@ export const List = styled.View`
   margin-bottom: 20px;
 `;
 
-export const Checkin = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
+export const Ask = styled.TouchableOpacity`
   background-color: #fff;
   padding: 15px;
   border: 1px solid #ccc;
@@ -39,13 +37,27 @@ export const Checkin = styled.View`
   margin-top: 15px;
 `;
 
-export const CheckinTitle = styled.Text`
+export const AskHeader = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+`;
+
+export const AskTitle = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const AskTitleText = styled.Text`
   font-size: 13px;
   font-weight: bold;
+  color: ${props => (props.active ? '#42cb59' : '#444')};
+  margin-left: 3px;
+`;
+
+export const AskDate = styled.Text`
+  font-size: 13px;
   color: #444;
 `;
 
-export const CheckinDate = styled.Text`
-  font-size: 13px;
-  color: #444;
-`;
+export const AskBody = styled.Text``;

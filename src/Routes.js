@@ -7,15 +7,25 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Topbar from './components/Topbar';
 import Login from './pages/SignIn';
 import Checkins from './pages/Checkins';
-import HelpOrders from './pages/HelpOrders';
+import HelpOrdersList from './pages/HelpOrders';
+import HelpOrdersShow from './pages/HelpOrders/ShowQuestion';
+import HelpOrdersNew from './pages/HelpOrders/NewQuestion';
 import Profile from './pages/Profile';
 
 const Base = createStackNavigator();
 const Stack = createStackNavigator();
+const HelpStack = createStackNavigator();
 const BottomTab = createBottomTabNavigator();
 
 const switchOptions = {
   headerShown: false,
+};
+
+const defaultStackHeaderOptions = {
+  headerStyle: { height: 30 },
+  headerTitle: () => <Topbar />,
+  headerTitleAlign: 'center',
+  headerBackImage: () => <Icon name="chevron-left" size={20} color="#000" />,
 };
 
 function SignInNavigator() {
@@ -23,6 +33,28 @@ function SignInNavigator() {
     <Stack.Navigator initialRouteName="Login">
       <Stack.Screen name="Login" options={switchOptions} component={Login} />
     </Stack.Navigator>
+  );
+}
+
+function HelpOrdersNavigator() {
+  return (
+    <HelpStack.Navigator initialRouteName="HelpOrdersList">
+      <HelpStack.Screen
+        name="HelpOrdersList"
+        options={defaultStackHeaderOptions}
+        component={HelpOrdersList}
+      />
+      <HelpStack.Screen
+        name="HelpOrdersNew"
+        options={defaultStackHeaderOptions}
+        component={HelpOrdersNew}
+      />
+      <HelpStack.Screen
+        name="HelpOrdersShow"
+        options={defaultStackHeaderOptions}
+        component={HelpOrdersShow}
+      />
+    </HelpStack.Navigator>
   );
 }
 
@@ -52,7 +84,7 @@ function SignedNavigator() {
       />
       <BottomTab.Screen
         name="HelpOrders"
-        component={HelpOrders}
+        component={HelpOrdersNavigator}
         options={{
           tabBarLabel: 'Pedir Ajuda',
           tabBarIcon: ({ color }) => (
@@ -74,6 +106,20 @@ function SignedNavigator() {
   );
 }
 
+function getBaseScreenOptions(route) {
+  try {
+    const { routeNames, index } = route.route.state;
+    const currentRoute = routeNames[index];
+
+    if (currentRoute === 'HelpOrders') {
+      return switchOptions;
+    }
+    return defaultStackHeaderOptions;
+  } catch (err) {
+    return defaultStackHeaderOptions;
+  }
+}
+
 export default function Routes({ signed }) {
   return (
     <NavigationContainer>
@@ -87,11 +133,7 @@ export default function Routes({ signed }) {
         ) : (
           <Base.Screen
             name="Signed"
-            options={{
-              headerStyle: { height: 30 },
-              headerTitle: () => <Topbar />,
-              headerTitleAlign: 'center',
-            }}
+            options={route => getBaseScreenOptions(route)}
             component={SignedNavigator}
           />
         )}
