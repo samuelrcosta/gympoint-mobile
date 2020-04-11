@@ -20,6 +20,7 @@ import {
   EnrollBody,
   EnrollText,
   LogoutButton,
+  LogoutButtonText,
 } from './styles';
 
 export default function Profile() {
@@ -108,7 +109,7 @@ export default function Profile() {
       </InfoData>
 
       <LogoutButton onPress={handleLogout} loading={loading}>
-        Sair
+        <LogoutButtonText>Sair</LogoutButtonText>
       </LogoutButton>
     </Container>
   );

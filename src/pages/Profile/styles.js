@@ -80,3 +80,9 @@ export const EnrollText = styled.Text`
 export const LogoutButton = styled(Button)`
   margin: 10px 0;
 `;
+
+export const LogoutButtonText = styled.Text`
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+`;

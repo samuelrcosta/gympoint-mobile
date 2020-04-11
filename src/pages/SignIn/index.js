@@ -3,7 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Logo from '../../assets/logo.png';
 import { signInRequest } from '../../store/modules/auth/actions';
-import { Container, LogoImage, Form, FormInput, SubmitButton } from './styles';
+import {
+  Container,
+  LogoImage,
+  Form,
+  FormInput,
+  SubmitButton,
+  ButtonText,
+} from './styles';
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -31,7 +38,7 @@ export default function SignIn() {
         />
 
         <SubmitButton onPress={handleSubmit} loading={loading}>
-          Entrar no sistema
+          <ButtonText>Entrar no sistema</ButtonText>
         </SubmitButton>
       </Form>
     </Container>

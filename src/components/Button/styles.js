@@ -8,9 +8,3 @@ export const Container = styled(BaseButton)`
   align-items: center;
   justify-content: center;
 `;
-
-export const Text = styled.Text`
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-`;
